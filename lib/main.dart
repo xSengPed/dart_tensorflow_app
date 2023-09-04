@@ -1,7 +1,8 @@
-import 'package:dart_tensor_flow_app/screens/splash_screen/splash_screen.dart';
+// import 'package:dart_tensor_flow_app/models/screen_params.dart';
+import 'package:dart_tensor_flow_app/models/screen_params.dart';
+import 'package:dart_tensor_flow_app/screens/main_menu/main_menu.dart';
 import 'package:dart_tensor_flow_app/services/tf_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplahScreen(),
+      home: MainMenu(),
     );
   }
 }
