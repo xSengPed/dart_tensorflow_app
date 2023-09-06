@@ -70,15 +70,19 @@ class _ObjectDetectScreenState extends State<ObjectDetectScreen>
                   ? Center(child: CircularProgressIndicator())
                   : Stack(
                       children: [
-                        AspectRatio(
-                          aspectRatio: 1,
+                        // AspectRatio(
+                        //   child: ,
+                        // ),
+
+                        Container(
                           child: CameraPreview(con.cameraController),
                         ),
-                        _statsWidget(),
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: _boundingBoxes(),
-                        ),
+                        // _statsWidget(),
+                        _boundingBoxes()
+                        // AspectRatio(
+                        //   aspectRatio: 1,
+                        //   child: _boundingBoxes(),
+                        // ),
                       ],
                     ),
             ),
