@@ -31,6 +31,8 @@
     
     <key>NSCameraUsageDescription</key>
     <string>Enable Camera Permission</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Enable Image Library Permission</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

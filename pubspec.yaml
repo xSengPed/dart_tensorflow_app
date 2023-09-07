@@ -37,6 +37,9 @@ flutter:
   assets:
     - assets/
     - assets/models/
+    - assets/models/image_classification/
+    - assets/models/object_detection/
+    - assets/models/text_classification/
 
     
   #   - images/a_dot_ham.jpeg

@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:camera/camera.dart';
 import 'package:dart_tensor_flow_app/models/recognition.dart';
 import 'package:dart_tensor_flow_app/models/screen_params.dart';
-
 import 'package:dart_tensor_flow_app/services/detector_service.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +21,6 @@ class ObjectDectectScreenController extends ChangeNotifier {
   }
 
   void _initStateAsync() async {
-    log("_initStateAsync");
     _initializeCamera();
     Detector.start().then((instance) {
       _detector = instance;
@@ -37,19 +33,41 @@ class ObjectDectectScreenController extends ChangeNotifier {
   }
 
   void _initializeCamera() async {
-    log("_initializeCamera");
-    cameras = await availableCameras();
-    _cameraController = CameraController(
-      cameras[0],
-      ResolutionPreset.medium,
-      enableAudio: false,
-    )..initialize().then((_) async {
-        await cameraController.startImageStream(onLatestImageAvailable);
-        // notifyListeners();
-        ScreenParams.previewSize = cameraController.value.previewSize!;
-      });
+    try {
+      cameras = await availableCameras();
 
-    notifyListeners();
+      if (cameras.length == 0) {
+        throw Exception("Camera not found");
+      }
+      _cameraController = CameraController(
+        cameras[0],
+        ResolutionPreset.medium,
+        enableAudio: false,
+      )..initialize().then((_) async {
+          await cameraController.startImageStream(onLatestImageAvailable);
+          // notifyListeners();
+          ScreenParams.previewSize = cameraController.value.previewSize!;
+        });
+
+      notifyListeners();
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('${e.toString()}'),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Close"))
+            ],
+          );
+        },
+      );
+    }
   }
 
   void onLatestImageAvailable(CameraImage cameraImage) async {

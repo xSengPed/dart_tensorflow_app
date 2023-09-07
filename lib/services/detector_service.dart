@@ -69,8 +69,10 @@ class _Command {
 /// are executed in a background isolate.
 /// This class just sends and receives messages to the isolate.
 class Detector {
-  static const String _modelPath = 'assets/models/ssd_mobilenet.tflite';
-  static const String _labelPath = 'assets/models/labelmap.txt';
+  static const String _modelPath =
+      'assets/models/object_detection/ssd_mobilenet.tflite';
+  static const String _labelPath =
+      'assets/models/object_detection/labelmap.txt';
 
   Detector._(this._isolate, this._interpreter, this._labels);
 

@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
 
-abstract class Classifier {}
-
 class TfService {
   static late tfl.Interpreter _interpreter;
   static late Map<String, int> _dict;
@@ -36,7 +34,7 @@ class TfService {
     }
     try {
       _interpreter = await tfl.Interpreter.fromAsset(
-          "assets/models/text_classification.tflite",
+          "assets/models/text_classification/text_classification.tflite",
           options: options);
       log("Interpreter loading success!");
     } catch (e) {
@@ -46,7 +44,8 @@ class TfService {
 
   static void _loadDict() async {
     log("Load Dict");
-    final String vocab = await rootBundle.loadString("assets/models/vocab.txt");
+    final String vocab = await rootBundle
+        .loadString("assets/models/text_classification/vocab.txt");
     Map<String, int> dict = {};
     final vocabList = vocab.split('\n');
     for (var i = 0; i < vocabList.length; i++) {
